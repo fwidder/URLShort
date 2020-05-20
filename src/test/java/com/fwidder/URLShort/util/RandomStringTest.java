@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import java.util.HashSet;
 
 public class RandomStringTest {
-    private static Logger final log =LoggerFactory.getLogger(RandomStringTest .class)
+    private static final Logger log =LoggerFactory.getLogger(RandomStringTest .class);
 
     @RepeatedTest(value = 25)
     void nextStringTest() throws DuplicateMemberException {
