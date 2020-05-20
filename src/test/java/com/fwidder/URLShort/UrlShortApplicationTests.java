@@ -8,6 +8,7 @@ class UrlShortApplicationTests {
 
 	@Test
 	void contextLoads() {
+		//
 	}
 
 }

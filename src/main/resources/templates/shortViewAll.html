@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="de" th:replace="fragments/header :: header"></head>
+<body>
+<main class="container" role="main">
+    <div class="starter-template">
+        <h1>URL Short</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col"> URL</th>
+                <th scope="col"> Short URL</th>
+                <th scope="col" th:if="${hasSecondaryHost}"> Short URL 2</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="url : ${urls}">
+                <th scope="row"><a th:href="${url}" th:text="${url.url}">URL</a></th>
+                <td><a href="#" th:href="${hostPrimary} + '/s/' + ${url.urlShort}"
+                       th:text="${hostPrimary}+'/s/' + ${url.urlShort}">URLShort</a></td>
+                <td><a href="#" th:href="${hostSecondary} + '/s/' + ${url.urlShort}"
+                       th:if="${hasSecondaryHost}"
+                       th:text="${hostSecondary} + '/s/' + ${url.urlShort}">URLShort</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div lang="de" th:replace="fragments/footer :: footer"></div>
+</main>
+</body>
+</html>

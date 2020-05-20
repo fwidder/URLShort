@@ -2,8 +2,8 @@ package com.fwidder.URLShort.web;
 
 import com.fwidder.URLShort.dao.UrlDAO;
 import com.fwidder.URLShort.model.LongUrl;
+import com.fwidder.URLShort.model.Url;
 import com.fwidder.URLShort.service.UrlShortService;
-import com.fwidder.URLShort.util.UrlUtils;
 import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +16,8 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.Comparator;
 
 @Controller
 public class WebController {
@@ -48,19 +50,33 @@ public class WebController {
         model.addAttribute("hasSecondaryHost", hasSecondaryHost);
         try {
             model.addAttribute("urlShoort", urlShortService.shortUrlOf(url));
-            model.addAttribute("urlerror",false);
+            model.addAttribute("urlerror", false);
             header(model);
             return "short";
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        model.addAttribute("urlerror",true);
+        model.addAttribute("urlerror", true);
         header(model);
         return "shortForm";
     }
 
+    @GetMapping("/shortViewAll")
+    public String showAll(Model model, HttpServletRequest request) {
+        model.addAttribute("hostPrimary", hostPrimary);
+        model.addAttribute("hostSecondary", hostSecondary);
+        model.addAttribute("hasSecondaryHost", hasSecondaryHost);
+        Iterable<Url> urlsItr = urlDAO.findAll();
+        ArrayList<Url> urls = new ArrayList<>();
+        urlsItr.forEach(urls::add);
+        urls.sort(Comparator.comparing(o -> o.getUrl().toLowerCase()));
+        model.addAttribute("urls", urls);
+        header(model);
+        return "shortViewAll";
+    }
+
     @GetMapping("/short")
-    public String shortUrlForm(Model model, HttpServletRequest request) throws MalformedURLException {
+    public String shortUrlForm(Model model, HttpServletRequest request) {
         log.info("Request from IP \"{}\" for URL \"URL-Form\"", request.getHeader("X-FORWARDED-FOR"));
         model.addAttribute("longUrl", new LongUrl());
         return "shortForm";

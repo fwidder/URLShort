@@ -22,8 +22,6 @@ public class UrlDAOTest{
 
     @Test
     void findUrlByUrlTest(){
-        Url url = urlDAO.findUrlByUrl("https://google.de");
-
         assertNull(urlDAO.findUrlByUrlShort("https://abc.de"));
     }
 
