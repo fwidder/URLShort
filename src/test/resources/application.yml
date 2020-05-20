@@ -1,0 +1,19 @@
+app:
+  host:
+    hasSecondary: false
+    primary: http://localhost:8080
+    secondary:
+server:
+  tomcat:
+    threads:
+      max: 4
+spring:
+  datasource:
+    driverClassName: org.h2.Driver
+    password: password
+    url: jdbc:h2:mem:URL_TEST_DB
+    username: sa
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update

@@ -1,0 +1,19 @@
+app:
+  host:
+    hasSecondary: true
+    primary: https://fwidder.de
+    secondary: https://f0r.de
+server:
+  tomcat:
+    threads:
+      max: 4
+spring:
+  datasource:
+    driverClassName: org.h2.Driver
+    password: password
+    url: jdbc:h2:file:./URL_DB
+    username: sa
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update

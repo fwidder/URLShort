@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="de" th:replace="fragments/header :: header"></head>
+<body>
+<main class="container" role="main">
+    <div class="starter-template">
+        <h1>URL Short</h1>
+        <form action="#" method="post" th:action="@{/short}" th:object="${longUrl}">
+            <div class="form-group">
+                <div class="alert alert-danger" role="alert" th:if="${urlerror}">
+                    The URL you provided is not Valid! Please enter a Valid URL!<br>
+                    Example: https://google.de
+                </div>
+                <label for="url">URL</label>
+                <input aria-describedby="urlHelp" class="form-control" id="url" placeholder="Enter URL" th:field="*{url}"
+                       type="text">
+                <small class="form-text text-muted" id="urlHelp">Please enter the URL you want to be shorten!</small>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" type="submit">Submit</button>
+                <button class="btn btn-secondary" type="reset">Reset</button>
+            </div>
+        </form>
+    </div>
+</main>
+<div lang="de" th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

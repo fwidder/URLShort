@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="de" th:replace="fragments/header :: header"></head>
+<body>
+<main class="container" role="main">
+    <div class="starter-template">
+        <h1>URL Short</h1>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" th:href="${url}" th:text="'Your URL: ' + ${url}">YourURL</h5>
+                <p class="card-text">Here is your shot URL!</p>
+                <a class="card-link" href="#" th:href="${hostPrimary} + '/s/' + ${urlShoort}"
+                   th:text="${hostPrimary}+'/s/' + ${urlShoort}">URLShort</a>
+                <p class="card-text" th:if="${hasSecondaryHost}">You can also use</p>
+                <a class="card-link" href="#" th:href="${hostSecondary} + '/s/' + ${urlShoort}"
+                   th:if="${hasSecondaryHost}"
+                   th:text="${hostSecondary} + '/s/' + ${urlShoort}">URLShort</a><br><br>
+                <h6 class="card-subtitle mb-2 text-muted"
+                    th:text="'This is URL number ' + ${count} + ' in our Database!'">URLNumber</h6>
+            </div>
+        </div>
+    </div>
+    <div lang="de" th:replace="fragments/footer :: footer"></div>
+</main>
+</body>
+</html>
